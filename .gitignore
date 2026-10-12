@@ -24,5 +24,6 @@ __pycache__/
 .DS_Store
 Thumbs.db
 
-# Temporary files
+# Temporary and local batch files
 *.log
+push_to_github.bat
