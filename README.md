@@ -6,27 +6,60 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tests](https://github.com/sardaressa456-boop/ai-student-performance-predictor/actions/workflows/tests.yml/badge.svg)](https://github.com/sardaressa456-boop/ai-student-performance-predictor/actions)
 
-An end-to-end Machine Learning web application and analytics platform that analyzes student academic, behavioral, and demographic attributes to predict final secondary examination performance (`G3`, 0–20 scale).
+> **End-to-End Machine Learning | Python | Scikit-learn | Streamlit**
 
-Designed with an **early-intervention philosophy**: the model deliberately excludes mid-term period grades (`G1`, `G2`) to give educators and advisors actionable foresight before report cards are finalized.
+An interactive machine learning application that predicts students' final mathematics examination grades on a 0–20 scale using academic, lifestyle, and study-related features.
 
-![AI Student Performance Predictor Dashboard](assets/dashboard.png)
-
-- **GitHub Repository**: [https://github.com/sardaressa456-boop/ai-student-performance-predictor](https://github.com/sardaressa456-boop/ai-student-performance-predictor)
-- **Author Profile**: [sardaressa456-boop](https://github.com/sardaressa456-boop)
-- **Live Streamlit App**: [Deploy via Streamlit Community Cloud](https://share.streamlit.io/)
+Built with an **early-intervention focus**: period grades (`G1`, `G2`) are intentionally omitted to evaluate performance before report cards are finalized.
 
 ---
 
-## 📌 Project Overview
+### 🚀 Live Demo & Repository
+* **Live Web Application**: [Launch the AI Dashboard](http://localhost:8501) *(or your deployed Streamlit Community Cloud link)*
+* **Author GitHub**: [@sardaressa456-boop](https://github.com/sardaressa456-boop)
+* **Dataset**: [UCI Student Performance Dataset (Mathematics)](https://archive.ics.uci.edu/dataset/320/student+performance)
 
-Academic underperformance often stems from compound factors—inadequate study time, past failures, lack of educational support, and home environment. This project builds a reliable, reproducible machine learning system from the ground up:
+---
 
-1. **Exploratory Data Analysis (EDA)**: Investigates grade distributions, correlations, and feature impacts on 395 secondary students.
-2. **Leakage-Free Preprocessing**: Leverages Scikit-learn `Pipeline` and `ColumnTransformer` to handle imputation, categorical one-hot encoding, and numerical standardization strictly within training folds.
-3. **Rigorous Model Selection**: Compares Baseline Mean, Linear Regression, and Random Forest using 5-fold cross-validation.
-4. **Interactive Dashboard**: A modern, dark-navy Streamlit web application with Plotly analytics, interactive grade prediction, dynamic performance tiers, and CSV export.
-5. **Continuous Integration**: Automated test suite with `pytest` and GitHub Actions testing pipeline on every push.
+### 📊 Dashboard Preview
+
+![AI Student Performance Predictor Dashboard](assets/dashboard.png)
+
+---
+
+### 🌟 Project Highlights
+
+* **395 Student Records**: Real secondary educational data from the UCI Machine Learning Repository.
+* **10 Predictive Features**: Academic habits, past failures, travel time, family support, and study duration.
+* **Leakage-Free Preprocessing**: Scikit-learn `Pipeline` and `ColumnTransformer` with median/mode imputation, `StandardScaler`, and `OneHotEncoder`.
+* **Model Benchmarking**: 5-fold cross-validation comparing Linear Regression, Random Forest, and a Mean Baseline.
+* **Comprehensive Metrics**: Evaluated with MAE, RMSE, and R² on held-out test data.
+* **Interactive Dashboard**: Modern dark-navy Streamlit web app with Plotly charts, performance tiers, and CSV export.
+* **CI/CD Quality Assurance**: Automated test suite (`pytest`, `Streamlit AppTest`) running on every push via GitHub Actions.
+
+---
+
+### 🔬 Model Performance & Results
+
+Models were selected using **5-fold cross-validation on 316 training records** and independently evaluated on **79 held-out test students**.
+
+| Metric | Cross-Validation (5-Fold) | Held-Out Test Set (79 Students) |
+| :--- | :---: | :---: |
+| **Selected Model** | **Linear Regression** | **Linear Regression** |
+| **Mean Absolute Error (MAE)** | **3.22 pts** | **3.75 pts** |
+| **Root Mean Squared Error (RMSE)** | **4.27 pts** | **4.59 pts** |
+| **R² Score** | **0.0878** | **-0.0277** |
+
+#### Benchmark Comparison Table
+| Algorithm | 5-Fold CV MAE (Lower is better) | 5-Fold CV RMSE | 5-Fold CV R² | Selection Status |
+| :--- | :---: | :---: | :---: | :---: |
+| **Linear Regression** | **3.2159** | **4.2688** | **0.0878** | 🏆 **Winner** |
+| Random Forest Regressor | 3.3864 | 4.4920 | -0.0208 | Candidate |
+| Baseline (Mean Regressor) | 3.4029 | 4.5635 | -0.0350 | Benchmark |
+
+> *Note: This project demonstrates machine learning methodology using a small historical dataset. The modest test R² reflects the honest difficulty of early academic forecasting without mid-term grades; predictions are educational estimates and are not intended for high-stakes decisions.*
+
+![Actual vs Predicted Grades](assets/actual_vs_predicted.png)
 
 ---
 
@@ -36,12 +69,13 @@ Academic underperformance often stems from compound factors—inadequate study t
 ai-student-performance-predictor/
 ├── .github/
 │   └── workflows/
-│       └── tests.yml             # Automated CI pipeline with GitHub Actions
+│       └── tests.yml             # GitHub Actions CI automated testing
 ├── .streamlit/
 │   └── config.toml               # Professional dark navy theme configuration
 ├── assets/
 │   ├── dashboard.png             # UI overview dashboard screenshot
-│   ├── actual_vs_predicted.png   # Test set evaluation scatter plot
+│   ├── social_preview.png        # GitHub repository social preview banner
+│   ├── actual_vs_predicted.png   # Diagnostic test scatter plot
 │   ├── grade_distribution.png    # Target grade distribution chart
 │   └── studytime_vs_grade.png    # Average grade vs. study time chart
 ├── data/
@@ -55,7 +89,7 @@ ai-student-performance-predictor/
 ├── src/
 │   ├── __init__.py
 │   ├── explore_data.py           # Exploratory analysis script & static chart generator
-│   ├── preprocess.py             # Feature selection, cleaning, & Pipeline definition
+│   ├── preprocess.py             # Feature engineering & ColumnTransformer pipeline
 │   ├── train.py                  # 5-fold CV comparison, winner selection & persistence
 │   └── evaluate.py               # Independent test set evaluation & diagnostic plot
 ├── tests/
@@ -70,47 +104,13 @@ ai-student-performance-predictor/
 
 ---
 
-## 📊 Dataset & Features
+## 🛠️ Technology Stack
 
-Sourced from the **[UCI Machine Learning Repository: Student Performance Dataset](https://archive.ics.uci.edu/dataset/320/student+performance)** (Cortez and Silva, 2008), licensed under CC BY 4.0.
-
-### Input Features (10 Variables)
-| Feature | Type | Description |
-| :--- | :--- | :--- |
-| `age` | Numeric | Student age (15–22) |
-| `studytime` | Ordinal | Weekly study time (1: <2h, 2: 2–5h, 3: 5–10h, 4: >10h) |
-| `failures` | Numeric | Past class failures (0–4) |
-| `traveltime` | Ordinal | Home-to-school travel time (1: <15m, 2: 15–30m, 3: 30–60m, 4: >60m) |
-| `schoolsup` | Categorical | Extra educational support from school (`yes` / `no`) |
-| `famsup` | Categorical | Family educational support (`yes` / `no`) |
-| `paid` | Categorical | Extra paid classes in mathematics (`yes` / `no`) |
-| `activities` | Categorical | Extracurricular activities (`yes` / `no`) |
-| `higher` | Categorical | Desires to pursue higher education (`yes` / `no`) |
-| `internet` | Categorical | Internet access at home (`yes` / `no`) |
-
-*Target*: **`G3`** (Final mathematics exam grade, 0 to 20).
-
----
-
-## 🔬 Model Benchmarking & Results
-
-Models were evaluated on **316 training records** using **5-fold cross-validation** and finally verified on **79 held-out test records**.
-
-### 5-Fold Cross-Validation Comparison
-
-| Model | CV MAE (pts) | CV RMSE (pts) | CV R² Score |
-| :--- | :---: | :---: | :---: |
-| **Linear Regression (Selected)** | **3.2159** | **4.2688** | **0.0878** |
-| Random Forest Regressor | 3.3864 | 4.4920 | -0.0208 |
-| Baseline (Mean Regressor) | 3.4029 | 4.5635 | -0.0350 |
-
-* **Selection Decision**: Linear Regression demonstrated the lowest average prediction error across all five validation folds while avoiding the overfitting tendencies observed with tree ensembles on this sample size.
-* **Held-out Test Performance (79 unseen students)**:
-  * **MAE**: `3.7495` grade points
-  * **RMSE**: `4.5905` grade points
-  * **R² Score**: `-0.0277`
-
-![Actual vs Predicted Grades](assets/actual_vs_predicted.png)
+* **Language**: Python 3.12 / 3.13
+* **Data Science & ML**: Pandas, NumPy, Scikit-learn, Joblib, Matplotlib, Seaborn
+* **Web Application**: Streamlit, Plotly
+* **Testing & CI**: Pytest, Streamlit `AppTest`, GitHub Actions
+* **Version Control**: Git, GitHub
 
 ---
 
@@ -137,7 +137,7 @@ pip install -r requirements.txt
 # Run exploratory data analysis and generate static charts
 python src/explore_data.py
 
-# Run cross-validation and save the best model artifact
+# Run 5-fold cross-validation and save the best model artifact
 python -m src.train
 
 # Evaluate model on the 79 held-out test students
@@ -157,15 +157,6 @@ Open [http://localhost:8501](http://localhost:8501) in your browser.
 
 ---
 
-## 🌟 Application Features
-
-1. **Executive Dashboard**: KPI summary cards (records, features, test MAE), interactive distribution histograms with mean/median reference lines.
-2. **AI Prediction Engine**: Dynamic profile builder that uses the fitted Scikit-learn Pipeline directly, categorizing predictions into performance tiers (Distinction, Good Standing, Pass, At-Risk) with CSV result exports.
-3. **Interactive Data Explorer**: Filter students by study habits and aspirations, examine failure impacts with box plots, and inspect support interactions.
-4. **Model Performance Hub**: In-depth residual analysis, cross-validation bar charts, and transparent error metric reporting.
-
----
-
 ## ⚖️ Limitations & Ethical Considerations
 
 * **Sample Size**: The dataset comprises 395 students across two Portuguese secondary schools in 2005–2006. Regional and cultural context may differ from modern educational environments.
@@ -174,7 +165,7 @@ Open [http://localhost:8501](http://localhost:8501) in your browser.
 
 ---
 
-## 📜 License
+## 📜 Dataset Attribution & License
 
-This project is licensed under the [MIT License](LICENSE).
-The dataset is provided under [Creative Commons Attribution 4.0 International (CC BY 4.0)](https://archive.ics.uci.edu/dataset/320/student+performance).
+* **Dataset Citation**: Cortez, P. (2008). *Student Performance*. UCI Machine Learning Repository. [https://doi.org/10.24432/C5TG7T](https://doi.org/10.24432/C5TG7T), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+* **Application Code**: Licensed under the [MIT License](LICENSE).
