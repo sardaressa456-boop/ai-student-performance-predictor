@@ -1,0 +1,29 @@
+{
+  "selected_model": "Linear Regression",
+  "features": [
+    "age",
+    "studytime",
+    "failures",
+    "traveltime",
+    "schoolsup",
+    "famsup",
+    "paid",
+    "activities",
+    "higher",
+    "internet"
+  ],
+  "target": "G3",
+  "train_samples": 316,
+  "test_samples": 79,
+  "test_size": 0.2,
+  "random_state": 42,
+  "cv_folds": 5,
+  "cv_mae": 3.2159,
+  "cv_rmse": 4.2688,
+  "cv_r2": 0.0878,
+  "test_mae": 3.7495,
+  "test_rmse": 4.5905,
+  "test_r2": -0.0277,
+  "sklearn_version": "1.9.1",
+  "trained_at": "2026-10-12T11:04:37.721053+00:00"
+}
